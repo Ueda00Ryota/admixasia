@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='admixasia',
 
-    version='1.0',
+    version='1.0.2',
 
     description='An admixture analysis tool add EastAsia3 that supports raw data from 23andme, AncestryDNA, etc.',
     long_description=open('admix/README.rst','r').read(),
