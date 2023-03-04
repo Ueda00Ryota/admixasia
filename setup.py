@@ -1,17 +1,17 @@
 from setuptools import setup
 
 setup(
-    name='admix',
+    name='admixasia',
 
-    version='1.2',
+    version='1.0',
 
-    description='An admixture analysis tool that supports raw data from 23andme, AncestryDNA, etc.',
+    description='An admixture analysis tool add EastAsia3 that supports raw data from 23andme, AncestryDNA, etc.',
     long_description=open('admix/README.rst','r').read(),
 
-    url='https://github.com/stevenliuyi/admix',
+    url='https://github.com/Ueda00Ryota/admixasia',
 
-    author='Steven Liu',
-    author_email='me@yliu.io',
+    author='Ryota Ueda',
+    author_email='killertcell428@gmail.com',
 
     license='GNU General Public License v3.0',
 
@@ -33,13 +33,13 @@ setup(
 
     install_requires=['numpy','scipy'],
 
-    packages=['admix'],
+    packages=['admixasia'],
 
     package_data={
-        'admix':['data/*', 'README.rst']
+        'admixasia':['data/*', 'README.rst']
     },
 
     entry_points={
-        'console_scripts': ['admix=admix.admix:main'],
+        'console_scripts': ['admixasia=admixasia.admixasia:main'],
     },
 )
