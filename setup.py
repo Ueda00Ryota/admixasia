@@ -40,6 +40,6 @@ setup(
     },
 
     entry_points={
-        'console_scripts': ['admixasia=admixasia.admixasia:main'],
+        'console_scripts': ['admix=admix.admix:main'],
     },
 )
