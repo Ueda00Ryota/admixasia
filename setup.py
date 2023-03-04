@@ -36,7 +36,7 @@ setup(
     packages=['admixasia'],
 
     package_data={
-        'admixasia':['data/*', 'README.rst']
+        'admix':['data/*', 'README.rst']
     },
 
     entry_points={
