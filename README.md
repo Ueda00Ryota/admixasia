@@ -177,3 +177,8 @@ Our goal is to find the admixture fraction $q_k$ of the individual, which maximi
 $$\chi_{{l^{minor}_n}}(G_{ni})j_i\log(F_{nk}q_k)+\chi_{{l^{major}_n}}(G_{ni})j_i\log((J_{nk}-F_{nk})q_k)$$
 
 where $\chi$ is the indicator function, $J$ and $j$ are the all-ones matrix/vector. Note that the Einstein summation convention is implied here. With the constraints $0 \leq q_k \leq 1$ and $\sum {q_k} = 1$, we can obtain the admixture proportions $q_k$ by applying optimization techniques.
+
+### admixasia
+
+admixに東アジアパネルを追加 EastAsia3
+参考：https://onlinelibrary.wiley.com/doi/10.1111/ahg.12320
