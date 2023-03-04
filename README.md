@@ -17,63 +17,55 @@ Admix is a simple tool to calculate ancestry composition (admixture proportions)
 
 ### Installation
 #### Install from Github
-You can use `pip` to install Admix directly from this Github repository:
+You can use `pip` to install admixasia directly from this Github repository:
 ```
-pip install git+https://github.com/stevenliuyi/admix
+pip install git+https://github.com/Ueda00Ryota/admixasia
 ```
-
-#### Install from PyPI
-You can also install Admix from [PyPI](https://pypi.python.org/pypi/admix):
-```
-pip install admix
-```
-
-Note that due to the size limit, the package on PyPI only contains five models (`K7b`, `K12b`, `globe13`, `world9` and `E11`). If you want all models, you could download them or just install Admix from this repository as shown above.
 
 ### Usage
 Suppose that you've already had your 23andme raw data downloaded and placed in the current directory with the name `my_raw_data.txt`. Then you can perform admixture calculation by specifying the calculation model (`K7b` in this example):
 
 ```
-admix -f my_raw_data.txt -v 23andme -m K7b
+admixasia -f my_raw_data.txt -v 23andme -m K7b
 ```
 
 You can also set multiple models for calculation:
 ```
-admix -f my_raw_data.txt -v 23andme -m K7b K12b
+admixasia -f my_raw_data.txt -v 23andme -m K7b EastAsia3
 ```
 
 If no models are set, the program will apply all the available models:
 ```
-admix -f my_raw_data.txt -v 23andme
+admixasia -f my_raw_data.txt -v 23andme
 ```
 You can choose the raw data format by changing the `-v` or `--vendor` parameter. The values supported are listed [here](#raw-data-format).
 
 You may also set the `-o` or `--output` parameter to write the ancestry composition results into a file:
 ```
-admix -f my_raw_data.txt -v 23andme -o result.txt
+admixasia -f my_raw_data.txt -v 23andme -o result.txt
 ```
 
 If you don't have your raw data yet, you can also test the program by using a demo 23andme data file provided by the program:
 ```
-admix -m world9
+admixasia -m world9
 ```
 
 Chinese users may turn on the `-z` flag so the population would be displayed in Chinese:
 ```
-admix -z -m E11
+admixasia -z -m E11
 ```
 
 Besides, you may use `--sort` flag to sort the proportions and `--ignore-zeros` flag to display non-zero proportions only.
 
 For more help information, you could use:
 ```
-admix -h
+admixasia -h
 ```
 
 ### Output Example
 - **English**
 
-Command: `admix -m K12b`
+Command: `admixasia -m K12b`
 
 Output:
 ```
@@ -90,25 +82,6 @@ East Asian: 62.72%
 Caucasus: 0.00%
 Sub Saharan: 0.00%
 ```
-- **Chinese**
-
-Command: `admix -m K12b -z`
-
-Output:
-```
-格德罗西亚: 0.06%
-西伯利亚: 3.71%
-西北非: 0.00%
-东南亚: 33.43%
-大西洋地中海: 0.07%
-北欧: 0.00%
-南亚: 0.00%
-东非: 0.00%
-西南亚: 0.01%
-东亚: 62.72%
-高加索: 0.00%
-撒哈拉以南非洲: 0.00%
-```
 
 ### FAQ
 - **Question:** *Why I got the same estimated proportion for each population?*
@@ -116,7 +89,7 @@ Output:
 **Answer:** This package utilizes the optimization function [scipy.optimize.minimize](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) from the [SciPy](https://www.scipy.org) library, which has a parameter `tol` to control the tolerance for termination of the optimizer. The default tolerance is set to `1e-3` here. It works most of time, but sometimes `1e-3` is too big and causes early termination. You can manually set a smaller tolerance (say `1e-4`) to obtain correct results, although it will take longer to run the optimizer. You can do that by using the `-t` or `--tolerance` flag, for example:
 
 ```
-admix -f my_raw_data.txt -t 1e-4
+admixasia -f my_raw_data.txt -t 1e-4
 ```
 
 ### Raw Data Format
@@ -136,6 +109,7 @@ Admix supports many publicly available admixture models. All the calculator file
 
 | model value | model name | source |
 | ----- | --------- | ---- |
+| 'EastAsia3' | EastAsia3 | ---- |
 | `K7b` | Dodecad K7b | [Link](http://dodecad.blogspot.com/2012/01/k12b-and-k7b-calculators.html) |
 | `K12b` | Dodecad K12b | [Link](http://dodecad.blogspot.com/2012/01/k12b-and-k7b-calculators.html) |
 | `globe13` | Dodecad globe13 | [Link](http://dodecad.blogspot.com/2012/10/globe13-calculator.html) |
