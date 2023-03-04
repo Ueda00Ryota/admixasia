@@ -33,13 +33,13 @@ setup(
 
     install_requires=['numpy','scipy'],
 
-    packages=['admixasia'],
+    packages=['admix'],
 
     package_data={
         'admix':['data/*', 'README.rst']
     },
 
     entry_points={
-        'console_scripts': ['admix=admix.admix:main'],
+        'console_scripts': ['admixasia=admixasia.admix:main'],
     },
 )
