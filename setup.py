@@ -6,7 +6,7 @@ setup(
     version='1.0.4',
 
     description='An admixture analysis tool add EastAsia3 that supports raw data from 23andme, AncestryDNA, etc.',
-    long_description=open('admix/README.rst','r').read(),
+    long_description=open('admix/README.rst',encoding='UTF-8').read(),
 
     url='https://github.com/Ueda00Ryota/admixasia',
 
