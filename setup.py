@@ -18,7 +18,7 @@ setup(
         'Environment :: Console',
         'Intended Audience :: Science/Research',
         'Natural Language :: English',
-        'Natural Language :: Chinese (Simplified)',
+        'Natural Language :: Japanese(Simplified)',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
