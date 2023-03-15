@@ -13,8 +13,6 @@ setup(
     author='Ryota Ueda',
     author_email='killertcell428@gmail.com',
 
-    license='GNU General Public License v3.0',
-
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Environment :: Console',
@@ -40,6 +38,6 @@ setup(
     },
 
     entry_points={
-        'console_scripts': ['admixasia=admixasia.admix:main'],
+        'console_scripts': ['admixasia=admix.admix:main'],
     },
 )
