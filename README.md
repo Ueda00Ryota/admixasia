@@ -1,19 +1,8 @@
 ## Admix
 [![Build Status](https://travis-ci.org/stevenliuyi/admix.svg?branch=master)](https://travis-ci.org/stevenliuyi/admix)
-[![PyPI version](https://badge.fury.io/py/admix.svg)](https://badge.fury.io/py/admix)
 
-Admix is a simple tool to calculate ancestry composition (admixture proportions) from SNP raw data provided by various DNA testing vendors (such as [23andme](https://www.23andme.com/) and [AncestryDNA](https://www.ancestry.com/dna/)).
-
-- [Admix](#admix)
-  - [Installation](#installation)
-    - [Install from Github](#install-from-github)
-    - [Install from PyPI](#install-from-pypi)
-  - [Usage](#usage)
-  - [Output Example](#output-example)
-  - [FAQ](#faq)
-  - [Raw Data Format](#raw-data-format)
-  - [Models](#models)
-  - [Implementation](#implementation)
+Admixasia は[admix](https://github.com/stevenliuyi/admix) パッケージに東アジアの三か国（中国、日本、韓国）を追加したものです。(such as [23andme](https://www.23andme.com/) and [AncestryDNA](https://www.ancestry.com/dna/)).
+使用法については、admixと同じですが、こちらはGithub経由でしかインストールできないので注意してください(3/15時点)
 
 ### Installation
 #### Install from Github
@@ -22,47 +11,21 @@ You can use `pip` to install admixasia directly from this Github repository:
 pip install git+https://github.com/Ueda00Ryota/admixasia
 ```
 
-### Usage
-Suppose that you've already had your 23andme raw data downloaded and placed in the current directory with the name `my_raw_data.txt`. Then you can perform admixture calculation by specifying the calculation model (`K7b` in this example):
+### 使用法
+現在23andmeの生データに対応しております。パラメータは以下のように指定してください。
+-f 入力ファイル名　-v ファイル形式　-m モデル（複数選択可能）　-o 出力ファイル
 
-```
-admixasia -f my_raw_data.txt -v 23andme -m K7b
-```
-
-You can also set multiple models for calculation:
-```
-admixasia -f my_raw_data.txt -v 23andme -m K7b EastAsia3
-```
-
-If no models are set, the program will apply all the available models:
-```
-admixasia -f my_raw_data.txt -v 23andme
-```
-You can choose the raw data format by changing the `-v` or `--vendor` parameter. The values supported are listed [here](#raw-data-format).
-
-You may also set the `-o` or `--output` parameter to write the ancestry composition results into a file:
 ```
 admixasia -f my_raw_data.txt -v 23andme -o result.txt
 ```
 
-If you don't have your raw data yet, you can also test the program by using a demo 23andme data file provided by the program:
-```
-admixasia -m world9
-```
-
-Chinese users may turn on the `-z` flag so the population would be displayed in Chinese:
-```
-admixasia -z -m E11
-```
-
-Besides, you may use `--sort` flag to sort the proportions and `--ignore-zeros` flag to display non-zero proportions only.
-
-For more help information, you could use:
+ヘルプ:
 ```
 admixasia -h
 ```
 
-### Output Example
+### 出力結果
+日本語対応に変更予定
 - **English**
 
 Command: `admixasia -m K12b`
@@ -83,17 +46,8 @@ Caucasus: 0.00%
 Sub Saharan: 0.00%
 ```
 
-### FAQ
-- **Question:** *Why I got the same estimated proportion for each population?*
-
-**Answer:** This package utilizes the optimization function [scipy.optimize.minimize](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html) from the [SciPy](https://www.scipy.org) library, which has a parameter `tol` to control the tolerance for termination of the optimizer. The default tolerance is set to `1e-3` here. It works most of time, but sometimes `1e-3` is too big and causes early termination. You can manually set a smaller tolerance (say `1e-4`) to obtain correct results, although it will take longer to run the optimizer. You can do that by using the `-t` or `--tolerance` flag, for example:
-
-```
-admixasia -f my_raw_data.txt -t 1e-4
-```
-
-### Raw Data Format
-Admix supports raw data formats from the following DNA testing vendors with `-v` or `--vendor` parameter:
+### 生データ形式
+plink形式(ped,fam),hapmap形式追加予定
 
 | parameter value | vendor |
 | --------------- | ------ |
@@ -104,55 +58,19 @@ Admix supports raw data formats from the following DNA testing vendors with `-v`
 | wegene | [WeGene](https://www.wegene.com/en/) |
 | myheritage | [MyHeritageDNA](https://www.myheritage.com/dna) |
 
-### Models
-Admix supports many publicly available admixture models. All the calculator files are properties of their authors, and are not covered by the license of this program. Links are provided which contain more information for each model.
+### モデル
+選択可能モデル、その他情報はadmixと同じです。
+新たにadmixに東アジアパネルを追加しています　EastAsia3
+参考：https://onlinelibrary.wiley.com/doi/10.1111/ahg.12320
 
-| model value | model name | source |
-| ----- | --------- | ---- |
-| 'EastAsia3' | EastAsia3 | ---- |
-| `K7b` | Dodecad K7b | [Link](http://dodecad.blogspot.com/2012/01/k12b-and-k7b-calculators.html) |
-| `K12b` | Dodecad K12b | [Link](http://dodecad.blogspot.com/2012/01/k12b-and-k7b-calculators.html) |
-| `globe13` | Dodecad globe13 | [Link](http://dodecad.blogspot.com/2012/10/globe13-calculator.html) |
-| `goble10` | Dodecad globe10 | [Link](http://dodecad.blogspot.com/2012/10/globe10-calculator.html) |
-| `world9` | Dodecad world9 | [Link](http://dodecad.blogspot.com/2011/12/world9-calculator.html) |
-| `Eurasia7` | Dodecad Eurasia7 | [Link](http://dodecad.blogspot.com/2011/10/eurasia7-calculator.html) |
-| `Africa9` | Dodecad Africa9 | [Link](http://dodecad.blogspot.com/2011/09/africa9-calculator.html) |
-| `weac2` | Dodecad weac (West Eurasian cline) 2 | [Link](http://dodecad.blogspot.com/2012/06/weac2-calculator.html) |
-| `E11` | E11 | [Link](http://www.ranhaer.com/thread-32241-1-1.html) |
-| `K13` | Eurogenes K13 | [Link](https://bga101.blogspot.com/2013/11/updated-eurogenes-k13-at-gedmatch.html) |
-| `K36` | Eurogenes K36 | [Link](http://bga101.blogspot.com/2013/03/eurogenes-k36-at-gedmatch.html) |
-| `EUtest13` | Eurogenes EUtest K13 | [Link](http://bga101.blogspot.com/2013/11/updated-eurogenes-k13-at-gedmatch.html) |
-| `Jtest14` | Eurogenes Jtest K14 | [Link](http://bga101.blogspot.com/2012/09/eurogenes-ashkenazim-ancestry-test-files.html) |
-| `HarappaWorld` | HarappaWorld | [Link](http://www.harappadna.org/2012/05/harappaworld-admixture/) |
-| `TurkicK11` | Turkic K11 | [Link](http://www.anthrogenica.com/showthread.php?8817-Turkic-K11-Admixture-Calculator) |
-| `KurdishK10` | Kurdish K10 | [Link](http://www.anthrogenica.com/showthread.php?8571-K10-Kurdish-Calculator-Version-1/page6) |
-| `AncientNearEast13` | Ancient Near East K13 | [Link](http://www.anthrogenica.com/showthread.php?8193-ancient-DNA-in-the-Gedrosia-Near-East-Neolithic-K13) |
-| `K7AMI` | Eurogenes K7 AMI | [Link](http://www.anthrogenica.com/showthread.php?4548-Upcoming-DIY-Eurogenes-K7-amp-K8-Calculator-amp-Oracles-for-tracking-E-Asian-amp-ASI) |
-| `K8AMI` | Eurogenes K8 AMI | [Link](http://www.anthrogenica.com/showthread.php?4548-Upcoming-DIY-Eurogenes-K7-amp-K8-Calculator-amp-Oracles-for-tracking-E-Asian-amp-ASI) |
-| `MDLPK27` | MDLP K27 | [Link](http://www.anthrogenica.com/showthread.php?4557-Post-MDLP-K27-Results) |
-| `puntDNAL` | puntDNAL K12 Ancient World | [Link](http://www.anthrogenica.com/showthread.php?8034-PuntDNAL-K12-Ancient-World-Results) |
-| `K47` | LM Genetics K47 | [Link](https://anthrogenica.com/showthread.php?12788-New-K30-K47-World-Calculator) |
-| `K7M1` | Tolan K7M1 | [Link](http://gen3553.pagesperso-orange.fr/ADN/Calc.htm) |
-| `K13M2` | Tolan K13M2 | [Link](http://gen3553.pagesperso-orange.fr/ADN/Calc.htm) |
-| `K14M1` | Tolan K14M1 | [Link](http://gen3553.pagesperso-orange.fr/ADN/Calc.htm) |
-| `K18M4` | Tolan K18M4 | [Link](http://gen3553.pagesperso-orange.fr/ADN/Calc.htm) |
-| `K25R1` | Tolan K25R1 | [Link](http://gen3553.pagesperso-orange.fr/ADN/Calc.htm) |
-| `MichalK25`| Michal World K25 | [Link](https://anthrogenica.com/showthread.php?13359-Michal-s-World-K25-calculator) |
 
-### Implementation
-Maximum likelihood estimation (MLE) algorithm is applied for ancestry composition calculation, and the implementation is fairly straightforward.
-
-Let $F_{nk}$ be the minor allele frequency of SNP marker $n$ for population $k$ ,
-$l_n^{minor}$ and $l_n^{major}$ be the minor and major allele for marker $n$ respectively,
-and $G_{ni}$ be the allele at marker $n$ of the individual we're interested in ( $i=1,2$ ).
-
-Our goal is to find the admixture fraction $q_k$ of the individual, which maximize the log likelihood function
+### 計算方法
+祖先構成計算には最尤推定（MLE）アルゴリズムが適用され、その実装は極めて簡単である。
+集団$k$に対するSNPマーカー$n$のマイナーアレル頻度を$F_{nk}$とする。
+l_n^{minor}$と$l_n^{major}$はそれぞれマーカー$n$のマイナーアレルとメジャーアレルとし、$G_{ni}$を注目する個体のマーカー$n$における対立遺伝子( $i=1,2$ )とする。
+対数尤度関数を最大化し、個体の混和率$q_k$を見つけることができる。
 
 $$\chi_{{l^{minor}_n}}(G_{ni})j_i\log(F_{nk}q_k)+\chi_{{l^{major}_n}}(G_{ni})j_i\log((J_{nk}-F_{nk})q_k)$$
 
-where $\chi$ is the indicator function, $J$ and $j$ are the all-ones matrix/vector. Note that the Einstein summation convention is implied here. With the constraints $0 \leq q_k \leq 1$ and $\sum {q_k} = 1$, we can obtain the admixture proportions $q_k$ by applying optimization techniques.
 
-### admixasia
-
-admixに東アジアパネルを追加 EastAsia3
-参考：https://onlinelibrary.wiley.com/doi/10.1111/ahg.12320
+ここで、$chi$は指標関数、$J$と$j$はオールオンの行列/ベクトルである。なお、ここではアインシュタイン和の規約を暗示している。制約条件$0 ╱q_k╱1$、$sum {q_k} = 1$で、最適化技術を適用して混和割合$q_k$を求めることができる。
