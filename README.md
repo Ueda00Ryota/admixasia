@@ -15,19 +15,19 @@ pip install git+https://github.com/Ueda00Ryota/admixasia
 -f 入力ファイル名　-v ファイル形式　-m モデル（複数選択可能）　-o 出力ファイル
 
 ```
-admixasia -f my_raw_data.txt -v 23andme -o result.txt
+admix -f my_raw_data.txt -v 23andme -o result.txt
 ```
 
 ヘルプ:
 ```
-admixasia -h
+admix -h
 ```
 
 ### 出力結果
 日本語対応に変更予定
 - **English**
 
-Command: `admixasia -m K12b`
+Command: `admix -m K12b`
 
 Output:
 ```
