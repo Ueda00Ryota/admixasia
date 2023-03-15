@@ -1,6 +1,6 @@
-Admix
+Admixasia
 =====
 
-Admix is a simple tool to calculate ancestry composition (admixture proportions) from SNP raw data provided by various DNA testing vendors (such as 23andme and AncestryDNA).
+Admixasiaは、admixパッケージを日本人を対象として日本語対応、東アジア人種の祖先推定アルゴリズムの追加を行ったものです。
 
-For more information, please refer to https://github.com/stevenliuyi/admix.
+admixについては、次のurlを参照してください。 https://github.com/stevenliuyi/admix.
