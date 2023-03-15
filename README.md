@@ -1,4 +1,4 @@
-## Admix
+## Admixasia
 [![Build Status](https://travis-ci.org/stevenliuyi/admix.svg?branch=master)](https://travis-ci.org/stevenliuyi/admix)
 
 Admixasia は[admix](https://github.com/stevenliuyi/admix) パッケージに東アジアの三か国（中国、日本、韓国）を追加したものです。(such as [23andme](https://www.23andme.com/) and [AncestryDNA](https://www.ancestry.com/dna/)).
